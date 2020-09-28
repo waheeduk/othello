@@ -8,7 +8,7 @@ def Grid_number(x, y):
 def get_position(n):
 	"""produces a number between 0 and 7 for the position of the mouse
 	for the x and y coordinates"""
-	output = n//16
+	output = n//64
 	return(output)
 
 def get_Grid_number(x,y):
