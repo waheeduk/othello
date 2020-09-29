@@ -42,7 +42,7 @@ if random.random() > 0.5:
 	player = 1
 else:
 	player = 2
-print(player)
+
 
 def draw_grid():
 	bg = (255, 255, 255)
@@ -69,11 +69,9 @@ while running:
 			turn % player  == 0:
 			#need to check if move is valid before increasing turn counter
 			#and before placing tiles
-			turn_n = turn % player
-			print(turn)
 			x, y = pygame.mouse.get_pos()
 			selected = get_Grid_number(x, y)
-			if check_valid(selected, turn_n, black_tiles, white_tiles) == True:
+			if check_valid(selected, black_tiles, white_tiles) == True:
 				if selected not in black_tiles:
 					black_tiles.append(selected)
 					turn += 1
@@ -83,7 +81,7 @@ while running:
 			#and before placing tiles
 			x, y = pygame.mouse.get_pos()
 			selected = get_Grid_number(x, y)
-			if check_valid(selected, turn_n, black_tiles, white_tiles) == True:
+			if check_valid(selected, white_tiles, black_tiles) == True:
 				if selected not in white_tiles:
 					white_tiles.append(selected)
 					turn += 1

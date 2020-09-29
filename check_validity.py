@@ -12,7 +12,7 @@ flip_list = [ ]
 
 def flipped(tile, diff, seta, setb):
 	valid = False
-	for n in range(0, 80, 9):
+	for n in range(0, 80, diff):
 		print(tile+n)
 		if (tile+n) in seta:
 			print(tile+n)
@@ -25,50 +25,38 @@ def flipped(tile, diff, seta, setb):
 			flip_list.append(tile+n)
 	return valid
 
-def check_valid(tile, turn, set1, set2):
+def check_valid(tile, set1, set2):
 	"""checks if a move is valid, taking in the grid number of the tile 
 	selected, whether it is black or white's turn, and the set1/set2 which are
 	the list of black tiles/white tiles"""
 	valid = False
 	if tile >= 10 and tile <= 72:
 		values = [-9, -8, -7, -1, 1, 7, 8, 9]
-		for n in values: 
-			checked = n+tile
-			#if it is blacks turn
-			if turn % 2 == 0:
-				#if the checked tile is white
-				if flipped(tile, n, set1, set2) == True:
-					valid = True
-					break
-				else:
-					valid = False
-					print(valid)
-			elif turn % 2 == 1:
-				if checked in set1:
-					valid = True
-					break
-				else:
-					valid = False
-	elif tile % 8 == 0:
-		values = [-9, -8, -7, -1, 1, 7, 8, 9]
 		for n in values:
-			checked = n + tile
-			if turn % 2 == 1:
-				if checked <=0 or checked >= 81:
-					continue
-				elif checked in set2:
-					valid = True
-					break
-				else:
-					valid = False
-			elif turn % 2 == 1:
-				if 0>= checked >= 81:
-					continue
-				elif checked in set1:
-					valid = True
-					break
-				else:
-					valid = False
+			if (n +tile) in set2:
+				for x in range(1, 8):
+					if (tile + (n*x)) in set1:
+						valid = True
+	# elif tile % 8 == 0:
+	# 	values = [-9, -8, -7, -1, 1, 7, 8, 9]
+	# 	for n in values:
+	# 		checked = n + tile
+	# 		if turn % 2 == 1:
+	# 			if checked <=0 or checked >= 81:
+	# 				continue
+	# 			elif checked in set2:
+	# 				valid = True
+	# 				break
+	# 			else:
+	# 				valid = False
+	# 		elif turn % 2 == 1:
+	# 			if 0>= checked >= 81:
+	# 				continue
+	# 			elif checked in set1:
+	# 				valid = True
+	# 				break
+	# 			else:
+	# 				valid = False
 	return(valid)
 	
 
