@@ -34,7 +34,7 @@ def check_valid(tile, set1, set2):
 		values = [-9, -8, -7, -1, 1, 7, 8, 9]
 		test_values = [1, 8, 9]
 		# checked = [ ]
-		for n in test_values:
+		for n in values:
 			for x in range(1, 9):
 				check = tile+ n*x
 				if check in set1 or check not in set2:
@@ -46,5 +46,12 @@ def check_valid(tile, set1, set2):
 b_set = [38, 59, 71]
 w_set = [36, 37, 43, 44, 51, 53, 62, 39]
 
-print(check_valid(35, b_set, w_set))
-print(check_valid(59, b_set, w_set))
+a = (check_valid(35, b_set, w_set))
+print(a)
+print(len(a))
+b = (check_valid(59, b_set, w_set))
+print(b)
+print(len(b))
+c = (check_valid(40, b_set, w_set))
+print(c)
+print(len(c))
