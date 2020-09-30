@@ -8,7 +8,6 @@ def flip(n, set1, set2):
 		set2.remove(n)
 		set1.append(n)
 
-flip_list = [ ]
 
 def flipped(tile, diff, seta, setb):
 	valid = False
@@ -32,7 +31,7 @@ def check_valid(tile, set1, set2):
 	checked = [ ]
 	if tile >= 10 and tile <= 72:
 		values = [-9, -8, -7, -1, 1, 7, 8, 9]
-		test_values = [1, 8, 9]
+		# test_values = [1, 8, 9]
 		# checked = [ ]
 		for n in values:
 			for x in range(1, 9):
@@ -43,15 +42,49 @@ def check_valid(tile, set1, set2):
 					checked.append(check)
 	return(checked)
 
-b_set = [38, 59, 71]
-w_set = [36, 37, 43, 44, 51, 53, 62, 39]
+flip_list = []
 
-a = (check_valid(35, b_set, w_set))
-print(a)
-print(len(a))
-b = (check_valid(59, b_set, w_set))
-print(b)
-print(len(b))
-c = (check_valid(40, b_set, w_set))
-print(c)
-print(len(c))
+def recursive_check(tile, diff, set1, set2):
+	""" uses recursion to find if the selected tile is correct, where tile is 
+	the original tile chosen by the player, plus n times the diff, that
+	is difference between the original tile and the adjacent tile, where n is 
+	initially one """
+	for n in range(1, 8):
+		if tile + (n*diff) in set1:
+			print(f'flipped tiles are {tile}')
+			if tile not in flip_list:
+				flip_list.append(tile)
+			print(f'end tile is {tile+n*diff}')
+			end = tile + (n*diff)
+			if end in flip_list:
+				flip_list.remove(end)
+		elif tile + (n*diff) in set2:
+			new_tile = (tile + n*diff)
+			recursive_check(new_tile, diff, set1, set2)
+	print(f'flip list is {flip_list}')
+
+def check_valid_two(tile, set1, set2):
+	values = [-9, -8, -7, -1, 1, 7, 8, 9]
+	for value in values:
+		if tile + value in set2:
+			recursive_check(tile, value, set1, set2)
+
+# b_set = [38, 59, 71]
+# w_set = [36, 37, 43, 44, 51, 53, 62, 39]
+
+# b_set = [20, 28, 29, 36]
+# w_set = [37]
+
+# test_range = [35]
+
+# print(check_valid_two(35, w_set, b_set))
+
+# a = (check_valid(35, b_set, w_set))
+# print(a)
+# print(len(a))
+# b = (check_valid(59, b_set, w_set))
+# print(b)
+# print(len(b))
+# c = (check_valid(40, b_set, w_set))
+# print(c)
+# print(len(c))
