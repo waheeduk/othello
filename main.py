@@ -1,5 +1,5 @@
 from get_coordinate import get_coordinates
-from check_validity import check_valid
+from check_validity import check_valid, flip_list, flip
 from start_reset import reset_board
 import random
 from datetime import datetime
@@ -72,9 +72,14 @@ while running:
 			x, y = pygame.mouse.get_pos()
 			selected = get_Grid_number(x, y)
 			if check_valid(selected, black_tiles, white_tiles) == True:
+				print()
 				if selected not in black_tiles:
+					for z in flip_list:
+						flip(z, black_tiles, white_tiles)
 					black_tiles.append(selected)
+					flip_list.clear()
 					turn += 1
+			#if it is not valid then clear thfe flip list
 		elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3 and \
 			turn % player == 1:
 			#need to check if move is valid before increasing turn counter
@@ -83,7 +88,10 @@ while running:
 			selected = get_Grid_number(x, y)
 			if check_valid(selected, white_tiles, black_tiles) == True:
 				if selected not in white_tiles:
+					for z in flip_list:
+						flip(z, black_tiles, white_tiles)
 					white_tiles.append(selected)
+					flip_list.clear()
 					turn += 1
 		if event.type == pygame.KEYDOWN:
 			 if event.key == pygame.K_r:

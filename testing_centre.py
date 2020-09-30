@@ -42,3 +42,6 @@ def flipped(tile, diff, seta, setb):
 print(flipped(35, 9, black_tiles, white_tiles))
 print('the flip list is')
 print(flip_list)
+
+for x in range(2,9):
+	print(x)

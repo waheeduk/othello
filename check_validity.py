@@ -29,36 +29,22 @@ def check_valid(tile, set1, set2):
 	"""checks if a move is valid, taking in the grid number of the tile 
 	selected, whether it is black or white's turn, and the set1/set2 which are
 	the list of black tiles/white tiles"""
-	valid = False
+	checked = [ ]
 	if tile >= 10 and tile <= 72:
 		values = [-9, -8, -7, -1, 1, 7, 8, 9]
-		for n in values:
-			if (n +tile) in set2:
-				for x in range(1, 8):
-					if (tile + (n*x)) in set1:
-						valid = True
-	# elif tile % 8 == 0:
-	# 	values = [-9, -8, -7, -1, 1, 7, 8, 9]
-	# 	for n in values:
-	# 		checked = n + tile
-	# 		if turn % 2 == 1:
-	# 			if checked <=0 or checked >= 81:
-	# 				continue
-	# 			elif checked in set2:
-	# 				valid = True
-	# 				break
-	# 			else:
-	# 				valid = False
-	# 		elif turn % 2 == 1:
-	# 			if 0>= checked >= 81:
-	# 				continue
-	# 			elif checked in set1:
-	# 				valid = True
-	# 				break
-	# 			else:
-	# 				valid = False
-	return(valid)
-	
+		test_values = [1, 8, 9]
+		# checked = [ ]
+		for n in test_values:
+			for x in range(1, 9):
+				check = tile+ n*x
+				if check in set1 or check not in set2:
+					break
+				elif check in set2:
+					checked.append(check)
+	return(checked)
 
-b_set = [25, 62]
-w_set = [44, 53]
+b_set = [38, 59, 71]
+w_set = [36, 37, 43, 44, 51, 53, 62, 39]
+
+print(check_valid(35, b_set, w_set))
+print(check_valid(59, b_set, w_set))
