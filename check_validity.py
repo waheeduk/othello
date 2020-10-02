@@ -54,37 +54,25 @@ def recursive_check(tile, diff, set1, set2):
 			print(f'flipped tiles are {tile}')
 			if tile not in flip_list:
 				flip_list.append(tile)
-			print(f'end tile is {tile+n*diff}')
 			end = tile + (n*diff)
+			print(f'n*diff is {n}*{diff} is {n*diff}')
+			print(f'end tile is {end}')
 			if end in flip_list:
 				flip_list.remove(end)
+				print('\n')
+				print('end removed from flip list')
+				print('flip list')
 		elif tile + (n*diff) in set2:
 			new_tile = (tile + n*diff)
 			recursive_check(new_tile, diff, set1, set2)
+		else:
+			break
 	print(f'flip list is {flip_list}')
 
 def check_valid_two(tile, set1, set2):
 	values = [-9, -8, -7, -1, 1, 7, 8, 9]
 	for value in values:
 		if tile + value in set2:
-			recursive_check(tile, value, set1, set2)
-
-# b_set = [38, 59, 71]
-# w_set = [36, 37, 43, 44, 51, 53, 62, 39]
-
-# b_set = [20, 28, 29, 36]
-# w_set = [37]
-
-# test_range = [35]
-
-# print(check_valid_two(35, w_set, b_set))
-
-# a = (check_valid(35, b_set, w_set))
-# print(a)
-# print(len(a))
-# b = (check_valid(59, b_set, w_set))
-# print(b)
-# print(len(b))
-# c = (check_valid(40, b_set, w_set))
-# print(c)
-# print(len(c))
+			print(tile)
+			print(value)
+			recursive_check((tile+value), value, set1, set2)
